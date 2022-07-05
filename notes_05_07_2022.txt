@@ -1,0 +1,35 @@
+
+CREATE TABLE bookdetails(
+ bookid INTEGER PRIMARY KEY,
+ title VARCHAR(20) NOT NULL,   -- We are not allowed to leave the value of this column
+ price FLOAT(6,2) NOT NULL,
+ author1 VARCHAR(20) NOT NULL,
+ author2 VARCHAR(20),
+ dateofpub DATE
+);
+
+/* The below insert statment is not having column names after the table name which means
+ we are entering the data in the same sequence as of when the table got created
+ and we are entering the data for all the columns */
+
+INSERT INTO bookdetails VALUES(1,'Java',600,'Patrick',null,'1985-12-01');
+
+/* The below insert statment is having the column names after the table name which means
+ we are entering the data for the columns mentioned after the table name. This is same as the way 
+we mentioned in the previous statement  */
+
+INSERT INTO bookdetails(bookid,title,price,author1,author2,dateofpub) VALUES(2,'HTML',300,'Robbert','Jack',null);
+
+/* The below insert statement is provided with the values but the column sequence is not same as 
+what we have mentioned while creating the table */
+
+INSERT INTO bookdetails(title,author1,author2,price,bookid,dateofpub) VALUES('CSS','Jack','Marry',300,3,'2010-10-20');
+
+/* In the below SQL statement we have skipped the author2 column which means the value for author2 whill
+be null ( undefined or unknown)
+INSERT INTO bookdetails(bookid,title,price,author1,dateofpub) VALUES(4,'DBMS',500,'Nitin','2010-02-23');
+
+
+
+
+

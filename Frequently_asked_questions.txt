@@ -1,0 +1,44 @@
+1) You are going to use the same link which was shared yesterday.
+https://iiht-vilt.webex.com/iiht-vilt/j.php?MTID=m16fa6278f874751539ebbe1c62e1ae37
+
+2) Where we are going to practice our sql command or which database to use?
+A : Mysql database we are using.
+
+3) I dont want to install mysql in system so how we can practice?
+A: Please make use of VM link shared along witht the credentials.
+
+
+4) Can I avail accessing VM in my personal laptop?
+A: Yes
+
+5) Can I install mysql in my personal laptop if I am comfortable in 
+  installation?
+A: Yes
+
+6) Can I get any help on how to install mysql in my personal laptop?
+A: You can watch the youtube videos which are showing stepwise installation
+   mysql.
+
+7) Can we install mysql in official laptop?
+A: No you are not allowed.
+
+
+8) So in my official laptop what is the way out?
+A: Please make use of vm with the credentials.
+
+
+9) I am finding a challenge in accessing the VM in my official laptop.
+A: With the mail for the vm credential , it was shared the email id where you can approach if you have
+any challenges related to the accessibility of the VM ( before that please read the documents which were
+shared relevant to vlab/vm.
+
+10) I dont know the password to login for the mysql given in the vlab?
+A: The password is pass@word1.
+
+[Note: PLEASE DONT DISCUSS ANYTHING IN THE CHAT WINDOW WHICH IS NOT RELEVANT TO THE SESSIONS. ]
+
+11) If we want install mysql , from which site I can access?
+https://dev.mysql.com/downloads/windows/installer/8.0.html
+
+
+

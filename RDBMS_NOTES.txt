@@ -1,3 +1,6 @@
+https://www.techonthenet.com/mysql/datatypes.php
+
+
 1. CREATE DATABASE mydatabase; --creating a database
 2. USE mydatabase;             --using a database
 3. CREATE TABLE emp_master     --creating a table
