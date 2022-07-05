@@ -125,4 +125,58 @@ Error Code: 1062. Duplicate entry '1234567' for key 'employees.votersid'
 Can you deferentiate between unique key and primary key?
 We can have only one primary key/column per table but unique keys/column can be many.
 primary key cannot have a null value whereas unique key can have null value/values.
+--------------------------------------------------------------------------------------------------------
+CREATE TABLE employee_master
+(
+  empcode VARCHAR(6) PRIMARY KEY,
+  firstname VARCHAR(15) NOT NULL,
+  middlename VARCHAR(15),
+  lastname VARCHAR(15) NOT NULL,
+  desig VARCHAR(15) NOT NULL,
+  dept VARCHAR(15) NOT NULL,
+  basic FLOAT(7,2) NOT NULL,
+  date_of_birth DATE NOT NULL
+);
 
+INSERT INTO employee_master VALUES('E00001','Peter',null,'Desouza','Mgr','Mkt',18000,'1980-12-06');
+INSERT INTO employee_master VALUES('E00002','Nalini','Kumari','Sharma','AsstMgr','Mkt',12000,'1985-10-12');
+INSERT INTO employee_master VALUES('E00003','Pankaj','Kumar','Shukla','AsstMgr','HR',15000,'1980-09-10');
+INSERT INTO employee_master VALUES('E00004','Sudhir',null,'Gupta','Mgr','Mkt',18000,'1980-12-06');
+INSERT INTO employee_master VALUES('E00005','Suma','Kumari','Raj','AsstMgr','Sales',13000,'1984-10-16');
+INSERT INTO employee_master VALUES('E00006','Farah',null,'Rashid','AsstMgr','Sales',14000,'1986-11-13');
+
+
+SELECT DISTINCT basic FROM employee_master;
+SELECT DISTINCT basic*.05 HRA FROM employee_master;
+
+
+SELECT distinct desig
+FROM employee_master
+WHERE dept='Mkt';
+
+
+1) FROM employee_master [ All the records and all the columns ]
+2) WHERE dept='Mkt'     [ the records where dept is Mkt and all the columns]
+3) SELECT desig         [ the records where dept is Mkt and the column is desig]
+4) distinct desig       [ distinct/unique designation ]
+-------------------------------------------------------------------------------------------------------------
+1 Creating Responsive web design using HTML 5 and CSS3 1  30-Jun-22 TO 30-Jun-22 
+2 Database Management System                           3  1-Jul-22 TO 5-Jul-22
+3 Programming using Java                               5  6-Jul-22 TO 12-Jul-22
+4 Java 11 Essentials                                   5  13-Jul-22 TO  19-Jul-22
+5 Java 11 Beyond Basics                                6  20-Jul-22 TO  27-Jul-22
+6 Service layer using Spring                           3  28-Jul-22 TO 1-Aug-22
+7 Persistence Layer using Spring Data                  4  2-Aug-22 TO 8-Aug-22
+8 REST API using Spring                                6  9-Aug-22 TO 17-Aug-22
+9 Spring Boot DevOps Tools and Capstone Project        7  18-Aug-22 TO 26-Aug-22
+----------------------------------------------------------------------------------------------------
+                                                       40
+
+ FIVE AGGREGATE FUNCTIONS=====> Because they are applied on a group of datas/values. 
+
+ 1) SUM
+ 2) MAX
+ 3) MIN
+ 4) COUNT
+ 5) AVG
+---------------------------------------------------------------------------------------------------------------
