@@ -29,7 +29,24 @@ INSERT INTO bookdetails(title,author1,author2,price,bookid,dateofpub) VALUES('CS
 be null ( undefined or unknown)
 INSERT INTO bookdetails(bookid,title,price,author1,dateofpub) VALUES(4,'DBMS',500,'Nitin','2010-02-23');
 
+--------------------------------------------------------------------------------------------------
+Some of the commonly made mistakes with insert.
+
+We have not mentioned the column names and also skipped the value for author2. This way of writing the 
+statement is not allowed
+
+INSERT INTO bookdetails VALUES(4,'DBMS',500,'Nitin','2010-02-23');
+
+Error Code: 1136. Column count doesn't match value count at row 1	
+
+We wanted to have a null value in author2 but we provided the null value within single quote. Now the
+null value is not the unknown or undefined value but the author name is null.
+
+INSERT INTO bookdetails VALUES(5,'DBMS',500,'Nitin','null','2010-02-23');
+
+We mentioned more values as compared to the number of columns 
+
+INSERT INTO bookdetails VALUES(6,'DBMS',500,'Nitin','Ashok','Radha','2010-02-23');
 
 
-
-
+Error Code: 1136. Column count doesn't match value count at row 1
