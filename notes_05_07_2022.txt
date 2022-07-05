@@ -50,3 +50,79 @@ INSERT INTO bookdetails VALUES(6,'DBMS',500,'Nitin','Ashok','Radha','2010-02-23'
 
 
 Error Code: 1136. Column count doesn't match value count at row 1
+
+
+If column names are used then the data provided in the values clause must have the same data type of column at same position.
+
+INSERT INTO bookdetails(title,author1,author2,price,bookid,dateofpub) VALUES('CSS','Jack','Marry',300,30,'Hi');
+	
+Error Code: 1292. Incorrect date value: 'Hi' for column 'dateofpub' at row 1
+
+In the below insert command we are inserting null for book title but book title cannot have a null value.
+
+INSERT INTO bookdetails VALUES(10,null,600,'Patrick',null,'1985-12-01');
+
+	Error Code: 1048. Column 'title' cannot be null	
+
+----------------------------
+Let us create a new table bookdetailsbackup which will get the data from bookdetails.
+
+CREATE TABLE bookdetailsbackup(
+ bookid INTEGER PRIMARY KEY,
+ title VARCHAR(20) NOT NULL,   
+ price FLOAT(6,2) NOT NULL,
+ author1 VARCHAR(20) NOT NULL,
+ author2 VARCHAR(20),
+ dateofpub DATE
+);
+
+INSERT INTO bookdetailsbackup SELECT * FROM bookdetails;
+
+
+
+CREATE TABLE bookdetailsbackup2(
+ bookid INTEGER PRIMARY KEY,
+ title VARCHAR(20) NOT NULL,   
+ price FLOAT(6,2) NOT NULL,
+);
+INSERT INTO bookdetailsbackup2 SELECT * FROM bookdetails;
+
+
+Error Code: 1136. Column count doesn't match value count at row 1
+
+
+INSERT INTO bookdetailsbackup2 SELECT bookid,title,price FROM bookdetails;
+
+------------------------------------------------------------------------------------------------	
+CREATE TABLE customer(
+id INTEGER PRIMARY KEY,
+name VARCHAR(20) NOT NULL,
+address VARCHAR(30) default 'Delhi'
+);
+
+INSERT INTO customer VALUES(1,'Abhi','Kolkata');
+INSERT INTO customer(id,name) VALUES(2,'Gaytri');
+INSERT INTO customer VALUES(3,'Sudesh',null);
+INSERT INTO customer VALUES(3,'Adil',null);
+
+Error Code: 1062. Duplicate entry '3' for key 'customer.PRIMARY'	
+INSERT INTO customer VALUES(null,'Adil',null);
+Error Code: 1048. Column 'id' cannot be null	
+
+
+create TABLE employees (
+id INTEGER PRIMARY KEY,
+name VARCHAR(30) NOT NULL,
+votersid INTEGER UNIQUE);
+
+INSERT INTO employees VALUES(1,'Ram',1234567);
+INSERT INTO employees VALUES(2,'Jatin',null);
+INSERT INTO employees VALUES(3,'Rakesh',null);
+INSERT INTO employees VALUES(4,'Amit',1234567);
+Error Code: 1062. Duplicate entry '1234567' for key 'employees.votersid'	
+
+
+Can you deferentiate between unique key and primary key?
+We can have only one primary key/column per table but unique keys/column can be many.
+primary key cannot have a null value whereas unique key can have null value/values.
+
