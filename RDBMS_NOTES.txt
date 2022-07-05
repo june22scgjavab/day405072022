@@ -1,0 +1,517 @@
+1. CREATE DATABASE mydatabase; --creating a database
+2. USE mydatabase;             --using a database
+3. CREATE TABLE emp_master     --creating a table
+ (
+   code VARCHAR(5) PRIMARY KEY,
+   name VARCHAR(20),
+   desig VARCHAR(10),
+   dept VARCHAR(10),
+   basic FLOAT(7,2)
+);
+
+4. DESC emp_master;  --to see the table structure
+
+--Inserting records
+
+INSERT INTO emp_master VALUES('E0001','Ram','Manager','Sales',15000.50);
+INSERT INTO emp_master VALUES('E0002','Tom','AsstMgr','Sales',12000.50);
+INSERT INTO emp_master VALUES('E0003','Zuben','Manager','Mkt',15000.25);
+INSERT INTO emp_master VALUES('E0004','Radhika','Clerk','HR',6000.00);
+INSERT INTO emp_master VALUES('E0005','Ahmed','Typist','HR',7000.00);
+
+COMMIT;
+
+--Displaying records
+
+SELECT * FROM emp_master;
+SELECT code,name,desig,dept,basic FROM emp_master;
+SELECT code,name,desig,dept FROM emp_master;
+SELECT code,basic FROM emp_master;
+SELECT code,name,basic FROM emp_master;
+
+--Updating records
+
+
+UPDATE emp_master SET name='Ramesh' WHERE code='E0001';
+COMMIT;
+--Deleting a record
+
+
+DELETE FROM emp_master WHERE code='E0001';
+COMMIT;
+
+
+--droping table
+
+
+DROP TABLE table1
+
+1) To display a list of tables.
+solution:- SHOW TABLES
+2) To display the table structure.
+solution:-SHOW DATABASES
+------------------------------------------------------------------------------------------------------
+SOME IMPORTANT ALTER COMMANDS
+1) ALTER TABLE table1 ADD COLUMN columnname datatype(<size>);  --adding a column to a table
+
+
+-------------------------------------------------------------------------------------------------------
+Created a table without primary key
+  
+ create table book_master
+  (
+    bookid varchar(5),
+    name varchar(5),
+    price int
+ );
+DESC book_master;
+
+
+2) ALTER TABLE table1 ADD PRIMARY KEY(code);  --adding a primary key to a table
+
+ALTER TABLE book_master ADD PRIMARY KEY(bookid);
+
+------------------------------------------------------------------------------------------------
+3) ALTER TABLE table1 ADD UNIQUE  KEY(code);  --adding unique key to a table 
+
+----------------------------------------------------------------------------------------
+ change the column name price as book_price with change in length of the datatype.
+ 4) a) ALTER TABLE table1 CHANGE column1 column2 datatype;--changing the column name and data type
+    b) ALTER TABLE table_name RENAME COLUMN old_column_name TO new_column_name;
+---------------------------------------------------------------------
+5) ALTER TABLE table1 ADD CONSTRAINT my_key FOREIGN KEY (column3)---making a column as foreign key
+-------------------------------------------------------------------
+6) ALTER TABLE table1 DROP FOREIGN KEY my_key;
+-------------------------------------------------------------------------------------------------------
+7) a) RENAME TABLE old_table TO new_table;
+7) b) ALTER TABLE table1 RENAME table2;
+
+-------------------------------------------------------------------------------------------------------------
+8) ALTER TABLE table1 DROP COLUMN column1;
+
+
+---------------------------------------------------------------------------------------------------------
+9) ALTER TABLE table1 DROP PRIMARY KEY;
+
+---------------------------------------------------------------------------------------------------------
+10)ALTER TABLE table1 MODIFY columnname datatype(<size>);
+
+-------------------------------------------------------------------------------------------------------
+
+11) ALTER TABLE table1 ADD COLUMN (column1 VARCHAR(5),column2 VARCHAR(5));
+
+QUestion: Add address and mobile_no to the employee_details table/
+
+ALTER TABLE employee_details ADD COLUMN (address VARCHAR(3),
+mobile_no VARCHAR(10));
+
+DESC employee_details;
+
+UPDATE employee_details SET address='Kolkata',mobile_no='9867451234'
+WHERE code='E0002';
+----------------------------------------------------------------------------------------------------------
+--Constraints
+
+--PRIMARY KEY CONSTRAINTS
+----------------------------------
+CREATE TABLE STUDENT_INFO1
+(
+STUDENT_ID VARCHAR(10) PRIMARY KEY,
+STUDENT_NAME VARCHAR(20),
+ADDRESS VARCHAR(20)
+);
+
+CREATE TABLE STUDENT_INFO2
+(
+STUDENT_ID VARCHAR(10),
+STUDENT_NAME VARCHAR(20),
+ADDRESS VARCHAR(20),
+CONSTRAINT PRIMARY KEY (STUDENT_ID)
+);
+
+CREATE TABLE STUDENT_INFO3
+(
+STUDENT_ID VARCHAR(10),
+STUDENT_NAME VARCHAR(20),
+ADDRESS VARCHAR(20),
+CONSTRAINT STUDENT_INFO3_PK PRIMARY KEY (STUDENT_ID)
+);
+
+CREATE TABLE STUDENT_INFO3
+(
+STUDENT_ID VARCHAR(10),
+STUDENT_NAME VARCHAR(20),
+ADDRESS VARCHAR(20),
+CONSTRAINT STUDENT_INFO3_PK PRIMARY KEY (STUDENT_ID,STUDENT_NAME)
+);
+
+
+ALTER TABLE STUDENT_INFO ADD PRIMARY KEY(STUDENT_ID);
+ALTER TABLE TRIAL ADD CONSTRAINT pk PRIMARY KEY(code);
+ALTER table employee drop primary key;
+--------------------------------------------------------------------------------
+FOREIGN KEY CONSTRAINTS--
+
+CREATE TABLE Student_Courses_type1(
+ STUDENT_ID VARCHAR(10), 
+  COURSE_CODE VARCHAR(20),
+ CONSTRAINT Student_Courses_Student_ID FOREIGN KEY(STUDENT_ID) REFERENCES Student_Info(STUDENT_ID),
+ CONSTRAINT Student_Courses_Course_Code FOREIGN KEY(COURSE_CODE) REFERENCES Course_Info(COURSE_CODE));
+
+CREATE TABLE Student_Courses_type2(
+  STUDENT_ID VARCHAR(10) , 
+  COURSE_CODE VARCHAR(20),
+  FOREIGN KEY(STUDENT_ID) REFERENCES Student_Info(STUDENT_ID),
+  FOREIGN KEY(COURSE_CODE) REFERENCES Course_Info(COURSE_CODE));
+
+CREATE TABLE Student_Courses_type3(
+ STUDENT_ID VARCHAR(10) , 
+ COURSE_CODE VARCHAR(20),
+  CONSTRAINT sctsid FOREIGN KEY(STUDENT_ID) REFERENCES Student_Info(STUDENT_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT sctcc FOREIGN KEY(COURSE_CODE) REFERENCES Course_Info(COURSE_CODE) ON UPDATE CASCADE ON DELETE CASCADE);
+
+CREATE TABLE Student_Courses_type4(
+ STUDENT_ID VARCHAR(10) , 
+ COURSE_CODE VARCHAR(20),
+   FOREIGN KEY(STUDENT_ID) REFERENCES Student_Info(STUDENT_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+   FOREIGN KEY(COURSE_CODE) REFERENCES Course_Info(COURSE_CODE) ON UPDATE CASCADE ON DELETE CASCADE);
+
+
+
+CREATE TABLE Student_Courses(
+ STUDENT_ID VARCHAR(10)  CONSTRAINT fk references Student_Info(STUDENT_ID),
+  COURSE_CODE VARCHAR(20),
+   CONSTRAINT Student_Courses_Course_Code FOREIGN KEY(COURSE_CODE) REFERENCES Course_Info(COURSE_CODE));
+
+
+CREATE TABLE Student_Courses(
+ STUDENT_ID VARCHAR(10)  CONSTRAINT fk references Student_Info(STUDENT_ID),
+  COURSE_CODE VARCHAR(20),
+   FOREIGN KEY(COURSE_CODE) REFERENCES Course_Info(COURSE_CODE));
+
+ALTER TABLE my_table ADD CONSTRAINT my_key FOREIGN KEY 
+('some_id') 
+REFERENCES some_new_table ('some_other_id') ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE Student_Courses DROP FOREIGN KEY fk ;
+--------------------------------------------------------------
+UNIQUE KEY CONSTRAINT
+
+
+CREATE TABLE TRIAL1
+(code VARCHAR(10),
+NAME VARCHAR(10) UNIQUE
+
+);
+
+CREATE TABLE TRIAL2
+(code VARCHAR(10),
+NAME VARCHAR(10),
+UNIQUE KEY(name)
+);
+
+CREATE TABLE TRIAL3
+(code VARCHAR(10),
+NAME VARCHAR(10),
+UNIQUE (name)
+);
+
+CREATE TABLE TRIAL4
+(code VARCHAR(10),
+NAME VARCHAR(10),
+CONSTRAINT unique_key UNIQUE (code)
+);
+
+CREATE TABLE TRIAL5
+(code VARCHAR(10),
+NAME VARCHAR(10),
+CONSTRAINT unique_key UNIQUE KEY (code)
+);
+
+
+alter table employee add unique key (code);
+alter table employee add unique (code);
+SHOW INDEX FROM employee;
+ALTER TABLE employee DROP INDEX code;
+-------------------------------------------------
+CHECK CONSTRAINT
+
+CREATE TABLE employee1
+(
+  code VARCHAR(5) PRIMARY KEY,
+  basic NUMBER(10) check (basic>10000),
+ );
+
+CREATE TABLE employee2
+(
+  code VARCHAR(5) PRIMARY KEY,
+  basic NUMBER(10) check (basic>10000),
+  desig VARCHAR(10) check (desig IN('MGr','AsstMgr'))
+);
+
+
+CREATE TABLE employee2
+(
+  code VARCHAR(5) PRIMARY KEY,
+  basic NUMBER(10), 
+  desig VARCHAR(10),
+ CONSTRAINT chk1 check (basic>10000), 
+ CONSTRAINT chk2 check (desig IN('MGr','AsstMgr'))
+);
+
+----------------------------------------
+SEQUENCE
+
+CREATE TABLE book (
+     id  INT(3) PRIMARY KEY AUTO_INCREMENT,
+     name CHAR(30) NOT NULL);
+ INSERT INTO book(name) values('Complete Ref Java'); 
+
+ALTER TABLE book AUTO_INCREMENT=100;
+-------------------------------------------------------
+CREATE TABLE person
+ (
+   code VARCHAR(10) PRIMARY KEY,
+   name VARCHAR(20) 
+
+ ) 
+
+ALTER TABLE Person MODIFY name VARCHAR(20) NOT NULL;
+SET FOREIGN_KEY_CHECKS=0;
+----------------------------------------------------------------------------------------------------
+SELECT code,name,basic, basic*.10 HRA
+FROM employee_master;
+
+
+CREATE TABLE employee_master
+ (
+   code VARCHAR(6) PRIMARY KEY,
+   name VARCHAR(15) NOT NULL,
+   desig VARCHAR(15) NOT NULL,
+   dept VARCHAR(15) NOT NULL,
+   basic FLOAT(7,2) NOT NULL
+ );
+ALTER table employee_master add column (desig varchar(10), dept varchar(10));
+
+update employee_master set desig='Mgr',dept='HR'
+WHERE code='E00001';
+update employee_master set desig='AsstMgr',dept='HR'
+WHERE code='E00002';
+
+
+INSERT INTO employee_master VALUES('E00001','Akash','Mgr','HR',
+16000);
+
+Display code,name,basic for employees 
+where basic is 10000
+ 
+SELECT code,name,basic
+FROM employee_master
+WHERE basic=10000
+
+Display code,name,basic for employees 
+where basic is less than 15000
+SELECT code,name,basic
+FROM employee_master
+WHERE basic<15000
+Display code,name,basic for employees 
+where basic is greater than or equal to 15000
+and less than equal to 17000 
+
+
+SELECT code,name,basic
+FROM employee_master
+WHERE basic>=15000 AND basic<=17000;
+
+
+SELECT code,name,basic
+FROM employee_master
+WHERE basic between 15000 AND 17000;
+
+Display code,name,basic not between 15000 and 17000.
+
+ 
+
+SELECT code,name,basic
+FROM employee_master
+WHERE basic not between 15000 AND 17000;
+
+Display code,name,desig
+from employee master
+where desig is either manager or asstmanager or typist
+
+SELECT code,name,desig
+FROM employee_master
+WHERE desig='Mgr' OR desig='AsstMgr' OR desig='Typist';
+
+SELECT code,name,desig
+FROM employee_master
+WHERE desig IN('Mgr','AsstMgr','Typist');
+
+DISPLAY code,name,desig
+for all records excluding Mge and AsstMgr.
+
+ SELECT code,name,desig
+FROM employee_master
+WHERE desig NOT IN('Mgr','AsstMgr'); 
+
+SELECT code,name,desig
+WHERE desig is NULL;
+ 
+ SELECT code,name,desig
+FROM employee_master
+WHERE desig is null;
+
+SELECT code,name,desig
+WHERE desig is not NULL.
+
+ 
+ SELECT code,name,desig
+FROM employee_master
+WHERE desig is not  null; 
+
+   
+Display code,name,basic for the employees
+where the name starts with character A.
+
+  SELECT code,name,basic
+  FROM employee_master
+  WHERE name like 'A%';
+
+Display code,name,basic for the employees
+where the name  which don't starts with character A.
+  
+
+  SELECT code,name,basic
+  FROM employee_master
+  WHERE name not like 'A%';
+
+  Display code,name,basic for the employees
+where the name ends up with character 'h';
+
+  SELECT code,name,basic
+  FROM employee_master
+  WHERE name  like '%h';
+
+ Display code,name,basic for the employees
+where the name starts with R and in between two characters
+and ending up with i.
+
+
+ SELECT code,name,basic
+  FROM employee_master
+  WHERE name  like 'R_ _ _ _i';
+ Rashmi
+-------------------------------------------------------------------------------
+
+--Create a table item_master , with 
+
+CREATE DATABASE shopdb;
+USE shopdb;
+
+CREATE TABLE item_master
+  (
+  item_code VARCHAR(5),
+  item_name VARCHAR(15) NOT NULL,
+  item_price FLOAT(7,2) NOT NULL,
+  item_category VARCHAR(10) NOT NULL,
+  CONSTRAINT item_master_pk PRIMARY KEY(item_code)
+  );
+
+--add some items in  item_master
+
+ INSERT INTO item_master VALUES('I0001','Colgate',60.78,'Paste');
+ INSERT INTO item_master VALUES('I0002','Lux',20.50,'Soap');
+ INSERT INTO item_master VALUES('I0003','Dettol',25.00,'Soap');
+ INSERT INTO item_master VALUES('I0004','Promise',59.00,'Paste');
+ INSERT INTO item_master VALUES('I0005','Park Avenue',450.00,'Perfume');
+ INSERT INTO item_master VALUES('I0006','Exotica',600.00,'Perfume');
+
+
+--Create table customer_master with
+
+  CREATE TABLE customer_master
+  (
+    cust_code VARCHAR(5),
+    firstname VARCHAR(20) NOT NULL,
+    middlename VARCHAR(20),
+    lastname VARCHAR(20) NOT NULL,
+    address VARCHAR(30) NOT NULL,
+    mobileno VARCHAR(10) NOT NULL,
+    city VARCHAR(30) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    CONSTRAINT customer_master_pk PRIMARY key(cust_code)
+   );
+
+--add some customers in  customer_master
+INSERT INTO customer_master VALUES('C0001','Ram','Kumar','Sharma','A/2 ,Netaji Nagar','9865343412','Durgapur','West Bengal');
+INSERT INTO customer_master VALUES('C0002','Shavant',null,' Pingle','55-A,Jawahar Colony','8763452356','Mumbai','Maharastra');
+INSERT INTO customer_master VALUES('C0003','Rama',null,'Chandran','456-1,Sastri Nagar','9834566788','Kolkata','West Bengal');
+INSERT INTO customer_master VALUES('C0004','Ashok','Kumar','Bajaj','2/1 Mahatma Gandhi Road','7890045666','Pune','Maharastra');
+
+
+--Create table item_transaction
+
+
+ CREATE TABLE item_transaction 
+ (
+   cust_code VARCHAR(5), -- FK   (ON DELETE CASCADE, ON UPDATE CASCADE)
+   item_code VARCHAR(5), -- FK   (ON DELETE CASCADE, ON UPDATE CASCADE)
+   date_of_pur DATE NOT NULL,
+   qty_pur INT(5) NOT NULL,
+   CONSTRAINT item_transaction_cust_code_fk FOREIGN KEY(cust_code) REFERENCES customer_master(cust_code) ON DELETE CASCADE ON UPDATE CASCADE,
+   CONSTRAINT item_transaction_item_code_fk FOREIGN KEY(item_code) REFERENCES item_master(item_code) ON DELETE CASCADE ON UPDATE CASCADE
+ );
+
+ 
+--add some transaction details  in  item_transaction
+  
+
+INSERT INTO item_transaction VALUES('C0001','I0003','2016-01-15',100);
+INSERT INTO item_transaction VALUES('C0002','I0003','2016-03-13',50);
+INSERT INTO item_transaction VALUES('C0001','I0005','2015-12-04',10);
+----------------------------------------------------------------------------------------------------------------------
+
+1) Display cust_code,firstname,middlename,item_code and date_of_purchase.
+
+ ANSI STYLE:-
+ 
+ SELECT it.cust_code,firstname,middlename,item_code,date_of_pur
+ FROM customer_master cm JOIN item_transaction it
+ ( Cartesian product)
+
+item_transaction.cust_code,firstname,middlename,item_code,date_of_pur
+ FROM customer_master  JOIN item_transaction
+ ON customer_master.cust_code=item_transaction.cust_code
+
+
+ THETA STYLE:-
+
+ SELECT it.cust_code,firstname,middlename,item_code,date_of_pur
+ FROM customer_master cm,item_transaction it
+ WHERE cm.cust_code=it.cust_code
+ 
+------------------------------------------------------------------------------------------
+
+1) Display cust_code,firstname,middlename,item_code,item_name,item_price and date_of_purchase.
+
+ ANSI STYLE:-
+ SELECT it.cust_code,firstname,middlename,it.item_code,item_name,item_price,date_of_pur
+ FROM customer_master cm JOIN item_transaction it
+ ON cm.cust_code=it.cust_code
+ JOIN item_master im
+ ON im.item_code=it.item_code;
+
+
+ SELECT it.cust_code,firstname,middlename,it.item_code,item_name,item_price,date_of_pur
+ FROM customer_master cm JOIN item_transaction it JOIN item_master im
+ ON cm.cust_code=it.cust_code
+ AND im.item_code=it.item_code;
+
+THETA STYLE:-
+
+ SELECT it.cust_code,firstname,middlename,it.item_code,item_name,item_price,date_of_pur
+ FROM customer_master cm,item_transaction it,item_master im
+ WHERE cm.cust_code=it.cust_code AND im.item_code=it.item_code;
+  
+------------------------------------------------------------------------------------------------
